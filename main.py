@@ -10,14 +10,23 @@ def get_days_from_today(date):
 
 print(get_days_from_today('2023-10-10'))
 
+try:
+    get_days_from_today(date='2023-10-10')
+except Exception as e:
+    print(e)
+
 
 # ЗАВДАННЯ 2. МОДУЛЬ 3
 
 import random
 
-def get_numbers_ticket(min, max, quantity):
-    lottery_numbers = [4, 15, 23, 28, 37, 45]
-    return lottery_numbers
+def get_numbers_ticket(min=10, max=20, quantity=5):
+    if min < 1 or max > 1000 or quantity < 1 or quantity > (max - min + 1):
+        return ()
     
-lottery_numbers = get_numbers_ticket(1, 49, 6)
+    return min, max, quantity
+    
+
+print(get_numbers_ticket(10, 20, 5))
+lottery_numbers = get_numbers_ticket(10, 20, 5)
 print("Your lottery numbers are:", lottery_numbers)
