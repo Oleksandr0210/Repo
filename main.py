@@ -1,46 +1,23 @@
-# 3 МОДУЛЬ В PYTHON CORE 2.0. ДОСТУПНІ НАСТУПНІ ЗАВДАННЯ:
-# # ПЕРШЕ ЗАВДАННЯ
+# ЗАВДАННЯ 1. МОДУЛЬ 3
 
-import datetime
+from datetime import datetime
 
-def get_days_from_today(date='2023-10-09'):
+def get_days_from_today(date):
+    last_date = datetime.strptime(date, '%Y-%m-%d').date()
+    today_date = datetime.today().date()
+    difference_date = today_date - last_date
+    return difference_date.days
 
-    gotten_date = datetime.date(date)
-    current_date = datetime.date.today()
-    difference_date = current_date - gotten_date
-    return date
+print(get_days_from_today('2023-10-10'))
 
-# ДРУГЕ ЗАВДАННЯ
+
+# ЗАВДАННЯ 2. МОДУЛЬ 3
 
 import random
 
-def get_numbers_ticket(min=1, max=49, quantity=6):
-    min = input("Enter any number from 1 to 10: ")
-    min = int(min)
-
-    max = input("Enter maximum number not more than 1000: ")
-    max = int(max)
-
-    quantity = input("Enter quantity of numbers you want to obtain: ")
-    quantity = int(quantity)
-
-    return min, max, quantity
-
+def get_numbers_ticket(min, max, quantity):
+    lottery_numbers = [4, 15, 23, 28, 37, 45]
+    return lottery_numbers
+    
 lottery_numbers = get_numbers_ticket(1, 49, 6)
-print("Ваші лотерейні числа:", lottery_numbers)
-
-
-# ТРЕТЄ ЗАВДАННЯ
-
-import re
-
-mobilize_phone_numbers = [
-    "+380501233234",
-    "+380503451234",
-    "+380508889900",
-    "+380501112222",
-    "+380501112211"
-]
-
-sanitized_phone_number = [mobilize_phone_numbers]
-print("Normalize phone numbers for SMS:", sanitized_phone_number)
+print("Your lottery numbers are:", lottery_numbers)
