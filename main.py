@@ -6,14 +6,14 @@ def get_days_from_today(date):
     last_date = datetime.strptime(date, '%Y-%m-%d').date()
     today_date = datetime.today().date()
     difference_date = today_date - last_date
+    try:
+        get_days_from_today(date='2023-10-10')
+    except Exception as e:
+        print(e)
+
     return difference_date.days
 
 print(get_days_from_today('2023-10-10'))
-
-try:
-    get_days_from_today(date='2023-10-10')
-except Exception as e:
-    print(e)
 
 
 # ЗАВДАННЯ 2. МОДУЛЬ 3
