@@ -1,45 +1,69 @@
 # ЗАВДАННЯ 1. МОДУЛЬ 4
 
-def total_salary(path):
-    with open('salary_file.txt') as salary_file:
-        developer_salary_date = {
-            'name1': 'Alex Korp', 'total_salary1': 3000,
-            'name2': 'Nikita Borisenko', 'total_salary2': 2000,
-            'name3': 'Sitarama Raju', 'total_salary3': 1000,
-        }
-        return developer_salary_date.split(',')
-    return total_salary
+from pathlib import Path
 
-first_sum = 3000
-second_sum = 2000
-third_sum = 1000
+file_path = Path("salary_file.txt")
 
-total_sums = first_sum + second_sum + third_sum
-print(total_sums)
+def total_salary(Path):
+    try:
+        with open("salary_file.txt", "r") as salary_file:
+            salary = list()
 
-total, average = total_salary("path/to/salary_file.txt")
-print(f"Total salary is: {total}, Average salary is: {average}")
+            for line in salary_file:
+                salary.append(line.split('Oleksiy Stepanyuk, 3000')[1])
+                salary.append(line.split('Artem Lysyi, 2000')[1])
+                salary.append(line.split('Yuriy Petryuk, 1000')[1])
+
+    except Exception as e:
+        return e
+    return salary_file
+
+print(total_salary("salary_file.txt"))
 
 
 # ЗАВДАННЯ 2. МОДУЛЬ 4
 
-def get_cats_info(path):
-    with open("path/to/cat_file.txt") as cat_info_file:
-        cat_info = [
-            {"id1": "60b90c1c13067a15887e1ae1", "name1": "Tayson", "age1": "3"},
-            {"id2": "60b90c2413067a15887e1ae2", "name2": "Vika", "age2": "1"},
-            {"id3": "60b90c2e13067a15887e1ae3", "name3": "Barsik", "age3": "2"},
-            {"id4": "60b90c3b13067a15887e1ae4", "name4": "Simon", "age4": "12"},
-            {"id5": "60b90c4613067a15887e1ae5", "name5": "Tessi", "age5": "5"},
-        ]
-        return cat_info.split(',')
+from pathlib import Path
+
+file_path = Path("cat_info_file.txt")
+
+def get_cats_info(Path):
+    try:
+        with open("path/to/cat_info_file.txt") as cat_info_file:
+            cat_info = dict({})
+
+            for line in cat_info_file:
+                cat_info.keys(line.split('60b90c1c13067a15887e1ae1,Tayson,3'))
+                cat_info.keys(line.split('60b90c2413067a15887e1ae2,Vika,1'))
+                cat_info.keys(line.split('60b90c2e13067a15887e1ae3,Barsik,2'))
+                cat_info.keys(line.split('60b90c3b13067a15887e1ae4,Simon,12'))
+                cat_info.keys(line.split('60b90c4613067a15887e1ae5,Tessi,5'))
+
+    except Exception as e:
+        return e
     return cat_info_file
 
-cats_info = get_cats_info("path/to/cats_file.txt")
-print(cats_info)
+print(get_cats_info("cat_info_file.txt"))
 
-
+            
 # ЗАВДАННЯ 4. МОДУЛЬ 4
+
+def add_contact():
+    print("Contact added")
+    while True:
+        user = int(input()).strip().lower()
+
+def change_contact():
+    print("Contact updated")
+
+def show_phone():
+    print()
+
+
+def parse_input(user_input):
+    cmd, *args = user_input.split()
+    cmd = cmd.strip().lower()
+    return cmd, *args
 
 def main():
     print("Welcome to the assistant bot!")
@@ -52,16 +76,14 @@ def main():
 
         elif command == "hello":
             print("How can I help you?")
-        elif command == "add John 1234567890":
-            print("Contact added")
+        elif command == "add John 0987654321":
+            print("Contact added.")
         elif command == "change John 0987654321":
-            print("Conctact updated")
-        elif command == "phone John":
-            print("0987654321")
-        elif command == "all":
+            print("Contact updated.")
+        elif command == "0987654321":
             print("all")
         else:
-            print("Invalid command.")
+            print("Invalid command")
 
 if __name__ == "__main__":
     main()
