@@ -29,7 +29,7 @@ file_path = Path("cat_info_file.txt")
 
 def get_cats_info(Path):
     try:
-        with open("path/to/cat_info_file.txt") as cat_info_file:
+        with open("cat_info_file.txt") as cat_info_file:
             cat_info = dict({})
 
             for line in cat_info_file:
