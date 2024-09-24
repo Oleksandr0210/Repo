@@ -1,17 +1,15 @@
 # ЗАВДАННЯ 1. МОДУЛЬ 4
 
 def total_salary(path):
+    total = 0
+    count = 0
     try:
-        with open(path, "salary_file.txt", "r", encoding='utf-8') as salary_file:
-            salary = list()
-
+        with open(path, "r", encoding='utf-8') as salary_file:
             for line in salary_file:
-                salary.append(line.split(','))
-                salary.append(line.split(','))
-                salary.append(line.split(','))
+                parts = line.strip().split(',')
 
-                if len(salary) > 1 and salary[1].isdigit():
-                    salary = int(salary[1])
+                if len(parts) > 1 and parts[1].isdigit():
+                    salary = int(parts[1])
                     total += salary
                     count += 1
         if count == 0:
@@ -34,19 +32,18 @@ def get_cats_info(path):
     cat_info_list = []
 
     try:
-        with open(path, "cat_info_file.txt", "r", encoding='utf-8') as cat_info_file:
+        with open(path, "r", encoding='utf-8') as cat_info_file:
             cat_info = dict({})
 
             for line in cat_info_file:
-                cat_info.keys(line.split(','))
-
-                if len(cat_info) == 15:
-                    cat_info = [{"id": "60b90c1c13067a15887e1ae1", "name": "Tayson", "age": "3"},
-                        {"id": "60b90c2413067a15887e1ae2", "name": "Vika", "age": "1"},
-                        {"id": "60b90c2e13067a15887e1ae3", "name": "Barsik", "age": "2"},
-                        {"id": "60b90c3b13067a15887e1ae4", "name": "Simon", "age": "12"},
-                        {"id": "60b90c4613067a15887e1ae5", "name": "Tessi", "age": "5"},
-                    ]
+                parts = line.strip().split(',')
+                if len(parts) == 3:
+                    cat_info = {
+                        "id": parts[0],
+                        "name": parts[1],
+                        "age": parts[2]
+                    }
+                    cat_info_list.append(cat_info)
         return cat_info_list
     except FileNotFoundError:
         return f"Файл не знайдений."
