@@ -89,6 +89,7 @@ def parse_input(user_input):
     return command, args
 
 def main():
+    print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter command: ")
         command, args = parse_input(user_input)
