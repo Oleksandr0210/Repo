@@ -98,41 +98,16 @@ def main():
             print("How can I help you?")
         
         elif command == "add":
-            if len(args) == 2:
-                name, phone = args
-                add_contact(name, phone)
-                print("Conctact added.")
-            else:
-                print("Error: Please provide both name and phone number.")
+            print(add_contact(args, contacts))
         
         elif command == "change":
-            if len(args) == 2:
-                name, new_phone = args
-                if change_contact(name, new_phone):
-                    print("Contact updated.")
-                else:
-                    print("No contact found.")
-            else:
-                print("Error: Please provide both name and new phone number.")
+            print(change_contact(args, contacts))
         
         elif command == "phone":
-            if len(args) == 1:
-                name = args[0]
-                phone = show_phone(name)
-                if phone:
-                    print(phone)
-                else:
-                    print("No contact found.")
-            else:
-                print("Error: Please provide a name.")
+            print(show_phone(args, contacts))
         
         elif command == "all":
-            contacts = show_all()
-            if contacts:
-                for name, phone in contacts.items():
-                    print(f"{name}: {exit}")
-            else:
-                print("No contacts available.")
+            print(show_all(args, contacts))
         
         elif command in ["close", "exit"]:
             print("Good bye!")
