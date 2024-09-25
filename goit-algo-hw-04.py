@@ -101,6 +101,7 @@ def main():
             if len(args) == 2:
                 name, phone = args
                 add_contact(name, phone)
+                print("Conctact added.")
             else:
                 print("Error: Please provide both name and phone number.")
         
@@ -108,18 +109,21 @@ def main():
             if len(args) == 2:
                 name, new_phone = args
                 change_contact(name, new_phone)
+                print("Contact updated.")
             else:
                 print("Error: Please provide both name and new phone number.")
         
         elif command == "phone":
             if len(args) == 1:
                 name = args[0]
-                show_phone(name)
+                phone = show_phone(name)
+                print(phone)
             else:
                 print("Error: Please provide a name.")
         
         elif command == "all":
-            show_all()
+            all = show_all()
+            print(all)
         
         elif command in ["close", "exit"]:
             print("Good bye!")
