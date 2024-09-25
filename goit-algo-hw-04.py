@@ -60,27 +60,27 @@ contacts = {}
 
 def add_contact(name, phone):
     contacts[name] = phone
-    print("Contact added.")
+    return "Contact added."
 
 def change_contact(name, new_phone):
     if name in contacts:
         contacts[name] = new_phone
-        print("Contact updated.")
+        return "Contact updated."
     else:
-        print("Contact not found.")
+        return "Contact not found."
 
 def show_phone(name):
     if name in contacts:
-        print(contacts[name])
+        return contacts[name]
     else:
-        print("Contact not found.")
+        return "Contact not found."
 
 def show_all():
     if contacts:
         for name, phone in contacts.items():
-            print(f"{name}: {phone}")
+            return f"{name}: {phone}"
     else:
-        print("No contacts available.")
+        return "No contacts available."
 
 def parse_input(user_input):
     parts = user_input.lower().split()
@@ -108,8 +108,10 @@ def main():
         elif command == "change":
             if len(args) == 2:
                 name, new_phone = args
-                change_contact(name, new_phone)
-                print("Contact updated.")
+                if change_contact(name, new_phone):
+                    print("Contact updated.")
+                else:
+                    print("No contact found.")
             else:
                 print("Error: Please provide both name and new phone number.")
         
@@ -117,13 +119,20 @@ def main():
             if len(args) == 1:
                 name = args[0]
                 phone = show_phone(name)
-                print(phone)
+                if phone:
+                    print(phone)
+                else:
+                    print("No contact found.")
             else:
                 print("Error: Please provide a name.")
         
         elif command == "all":
-            all = show_all()
-            print(all)
+            contacts = show_all()
+            if contacts:
+                for name, phone in contacts.items():
+                    print(f"{name}: {exit}")
+            else:
+                print("No contacts available.")
         
         elif command in ["close", "exit"]:
             print("Good bye!")
