@@ -55,30 +55,40 @@ print(get_cats_info("cat_info_file.txt"))
             
 # ЗАВДАННЯ 4. МОДУЛЬ 4
 
-
 contacts = {}
 
-def add_contact(name, phone):
-    contacts[name] = phone
-    return "Contact added."
-
-def change_contact(name, new_phone):
-    if name in contacts:
-        contacts[name] = new_phone
-        return "Contact updated."
+def add_contact(args):
+    if len(args) == 2:
+        name, phone = args
+        contacts[name] = phone
+        return "Contact added."
     else:
-        return "Contact not found."
+        return "Error: Please provide both name and phone number."
 
-def show_phone(name):
-    if name in contacts:
-        return contacts[name]
+def change_contact(args):
+    if len(args) == 2:
+        name, new_phone = args
+        if name in contacts:
+            contacts[name] = new_phone
+            return "Contact updated."
+        else:
+            return "Contact not found."
     else:
-        return "Contact not found."
+        return "Error: Please provide both name and new phone number."
 
-def show_all():
+def show_phone(args):
+    if len(args) == 1:
+        name = args[0]
+        if name in contacts:
+            return contacts[name]
+        else:
+            return "Contact not found."
+    else:
+        return "Error: Please provide a name."
+
+def show_all(args):
     if contacts:
-        for name, phone in contacts.items():
-            return f"{name}: {phone}"
+        return "\n".join([f"{name}: {phone}" for name, phone in contacts.items()])
     else:
         return "No contacts available."
 
@@ -98,16 +108,16 @@ def main():
             print("How can I help you?")
         
         elif command == "add":
-            print(add_contact(args, contacts))
+            print(add_contact(args))
         
         elif command == "change":
-            print(change_contact(args, contacts))
+            print(change_contact(args))
         
         elif command == "phone":
-            print(show_phone(args, contacts))
+            print(show_phone(args))
         
         elif command == "all":
-            print(show_all(args, contacts))
+            print(show_all(args))
         
         elif command in ["close", "exit"]:
             print("Good bye!")
