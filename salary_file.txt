@@ -1,3 +1,0 @@
-Andriy,3000
-Volodymyr, 2000
-Yuriy, 1200

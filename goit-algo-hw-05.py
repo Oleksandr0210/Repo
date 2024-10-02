@@ -23,15 +23,17 @@ print(fib(15))
 
 # ЗАВДАННЯ 2. МОДУЛЬ 5
 
+import re
+
 from typing import Callable
 
 def generator_numbers(text: str):
-    numbers = "1000.0", "27.45", "324.00"
+    numbers = re.findall(r'\d+\.\d+|\d+', text)
     for number in numbers:
         yield number
 
 def sum_profit(text: str, func: Callable):
-    yield sum(text, func)
+    yield sum(text(func))
 
 
 text = generator_numbers(text="Загальний дохід працівника складається з декількох частин: 1000.01 як основний дохід, доповнений додатковими надходженнями 27.45 і 324.00 доларів.")
