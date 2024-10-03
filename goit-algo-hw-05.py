@@ -21,6 +21,7 @@ print(fib(10))
 print(fib(15))
 
 
+
 # ЗАВДАННЯ 4. МОДУЛЬ 5
 
 contacts = {}
@@ -40,6 +41,18 @@ def add_contact(args):
         name, phone = args
         contacts[name] = phone
         return "Contact added."
+    else:
+        return "Enter the argument for the command."
+    
+@input_error
+def change_contact(args):
+    if len(args) == 2:
+        name, new_phone = args
+        if name in contacts:
+            contacts[name] = new_phone
+            return "Contact updated."
+        else:
+            return "Contact not found."
     else:
         return "Enter the argument for the command."
 
@@ -75,6 +88,9 @@ def main():
 
         if command == "add":
             print(add_contact(args))
+
+        elif command == "change":
+            print(change_contact(args))
         
         elif command == "phone":
             print(show_phone(args))
