@@ -36,6 +36,7 @@ class Record:
     def edit_phone(self, old_phone, new_phone):
         phone_ob = self.find_phone(old_phone)
         if phone_ob:
+            self.remove_phone(old_phone)
             self.add_phone(new_phone)
         else:
             raise ValueError(f"Phone {old_phone} not found to edit.")
@@ -74,7 +75,7 @@ john_record.add_phone("5555555555")
 book.add_record(john_record)
 jane_record = Record("Jane")
 jane_record.add_phone("9876543210")
-book.add_record(jane_record)     
+book.add_record(jane_record)
 print(book)
 
 john = book.find("John")
@@ -84,3 +85,4 @@ print(john)
 found_phone = john.find_phone("5555555555")
 print(f"{john.name}: {found_phone}")
 book.delete("Jane")
+print(book)
