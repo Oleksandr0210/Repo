@@ -1,5 +1,3 @@
-# ТЕХНІЧНЕ ЗАВДАННЯ. МОДУЛЬ 6
-
 from collections import UserDict
 
 class Field:
@@ -36,6 +34,10 @@ class Record:
     def edit_phone(self, old_phone, new_phone):
         phone_ob = self.find_phone(old_phone)
         if phone_ob:
+            try:
+                new_phone_ob = Phone(new_phone)
+            except ValueError as e:
+                raise ValueError(f"Cannot replace phone: {e}")
             self.remove_phone(old_phone)
             self.add_phone(new_phone)
         else:
@@ -69,10 +71,19 @@ class AddressBook(UserDict):
 
 
 book = AddressBook()
+
 john_record = Record("John")
 john_record.add_phone("1234567890")
 john_record.add_phone("5555555555")
 book.add_record(john_record)
+
+try:
+    john_record.edit_phone("5555555555", "as12")
+except ValueError as e:
+    print(e)
+
+print(john_record)
+
 jane_record = Record("Jane")
 jane_record.add_phone("9876543210")
 book.add_record(jane_record)
