@@ -1,5 +1,20 @@
 from datetime import datetime, timedelta
 
+def input_error(func):
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except IndexError:
+            return "Insufficient arguments provided."
+        except ValueError as e:
+            return str(e)
+        except KeyError:
+            return "Invalid key used."
+        except Exception as e:
+            return f"An error occurred: {e}"
+    return wrapper
+
+
 class AddressBook:
     def __init__(self):
         self.records = {}
@@ -61,16 +76,6 @@ class Record:
 
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
-
-
-def input_error(func):
-    def inner(args, book):
-        try:
-            return func(args, book)
-        except ValueError:
-            return "Give me name and phone please."
-
-    return inner
 
 
 @input_error
@@ -148,10 +153,7 @@ def birthdays(args, book: AddressBook):
 
 
 def parse_input(user_input):
-    parts = user_input.split()
-    command = parts[0].lower()
-    args = parts[1:]
-    return command, args
+    return user_input.split()
 
 
 def main():
