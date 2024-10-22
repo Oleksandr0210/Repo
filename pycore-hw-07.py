@@ -1,20 +1,5 @@
 from datetime import datetime, timedelta
 
-def input_error(func):
-    def wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except IndexError:
-            return "Insufficient arguments provided."
-        except ValueError as e:
-            return str(e)
-        except KeyError:
-            return "Invalid key used."
-        except Exception as e:
-            return f"An error occurred: {e}"
-    return wrapper
-
-
 class AddressBook:
     def __init__(self):
         self.records = {}
@@ -41,19 +26,19 @@ class AddressBook:
         
         return upcoming_birthdays
 
-
 class Field:
     def __init__(self, value):
         self.value = value
 
-
 class Name(Field):
     pass
 
-
 class Phone(Field):
-    pass
-
+    def __init__(self, value):
+        if len(value) == 10 and value.isdigit():
+            super().__init__(value)
+        else:
+            raise ValueError("Phone number must be 10 digits.")
 
 class Birthday(Field):
     def __init__(self, value):
@@ -76,6 +61,15 @@ class Record:
 
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
+
+
+def input_error(func):
+    def inner(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except (ValueError, IndexError, KeyError) as e:
+            return str(e)
+    return inner
 
 
 @input_error
