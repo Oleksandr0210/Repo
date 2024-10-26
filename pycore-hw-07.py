@@ -24,6 +24,12 @@ class AddressBook(UserDict):
             if record.birthday:
                 birthday_this_year = datetime.strptime(
                     record.birthday.value, "%d.%m.%Y").date().replace(year=today.year)
+
+                if birthday_this_year.weekday() == 5:
+                    birthday_this_year += timedelta(days=2)
+                elif birthday_this_year.weekday() == 6:
+                    birthday_this_year += timedelta(days=1)
+
                 if today <= birthday_this_year <= end_date:
                     upcoming_birthdays.append({
                         "name": record.name.value,
