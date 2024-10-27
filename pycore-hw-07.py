@@ -135,7 +135,12 @@ def show_phone(args, book: AddressBook):
 @input_error
 def show_all(args, book: AddressBook):
     if book.data:
-        return "\n".join([f"{name}: {', '.join([phone.value for phone in record.phones])}" for name, record in book.data.items()])
+        result = []
+        for name, record in book.data.items():
+            phones = ", ".join([phone.value for phone in record.phones])
+            birthday = record.birthday.value if record.birthday else "No birthday"
+            result.append(f"{name}: Phones: {phones}; Birthday: {birthday}")
+        return "\n".join(result)
     return "No contacts found."
 
 
